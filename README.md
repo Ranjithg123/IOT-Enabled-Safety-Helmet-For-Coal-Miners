@@ -1,1 +1,3 @@
-# IOT-Enabled-Safety-Helmet-For-Coal-Miners
+# IoT-Enabled Safety Helmet for Coal Miners: Real-Time Monitoring, Data Collection, and Analysis
+The inherent dangers associated with coal mining, including exposure to toxic gasses, the risk of rock falls, and the ever-present threat of explosions, have long posed a significant challenge to the industry in safeguarding the well-being of its employees. In recent years iot platforms have emerged. Using Iot platforms we can create a safety helmet for coal miners that can help monitor their environment, collect critical data, and enable real-time analysis. The purpose of this project is to create a smart safety helmet that can provide real-time data for the mining environment and we used ESP and another sensor for data collection and cloud for the dashboard. Provides a cost-effective, efficient, and reliable alternative to mining workers
+
