@@ -1,103 +1,112 @@
----
 
-# ![Helmet Icon](https://img.shields.io/badge/IoT-Helmet-blue) IoT Helmet Safety Dashboard
+# ![Helmet Icon](https://img.shields.io/badge/IoT-Helmet-blue) IoT Helmet Safety Dashboard  
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)  
+[![Firebase](https://img.shields.io/badge/Firebase-RealtimeDatabase-orange)](https://firebase.google.com/)  
+[![Chart.js](https://img.shields.io/badge/Chart.js-Visualization-red)](https://www.chartjs.org/docs/latest/)  
+[![Sample Data Mode](https://img.shields.io/badge/Sample%20Data-Enabled-brightgreen)](#)  
+[![AI Insights](https://img.shields.io/badge/AI-Enabled-blue)](#)  
+![ESP32 Firmware](https://img.shields.io/badge/ESP32-v3.2-blue)
 
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Firebase](https://img.shields.io/badge/Firebase-RealtimeDatabase-orange)](https://firebase.google.com/)
-[![Chart.js](https://img.shields.io/badge/Chart.js-Visualization-red)](https://www.chartjs.org/)
-
----
-
-## **Project Overview**
-
-The **IoT Helmet Safety Dashboard** is a **real-time safety monitoring system** designed for **coal mining and industrial workers**. It integrates **multiple sensors** on a smart helmet using an **ESP32 microcontroller**, displays live data on a **web dashboard**, and provides **AI-based analysis** via Google Gemini API.
+ 
 
 ---
 
-## **Live Demo**
+## **Project Overview**  
+The **IoT Helmet Safety Dashboard** is a **real-time safety monitoring system** for **coal mining and industrial workers**. It integrates **multiple sensors on a smart helmet** using an **ESP32 microcontroller**, displays live data on a **web dashboard**, and provides **AI-based analysis** using Google Gemini API.  
 
-> Add your deployed dashboard URL here (e.g., GitHub Pages / Netlify / AWS S3)
-> **Example:** [IoT Helmet Dashboard Demo](https://yourdemo.com)
-
----
-
-## **Features**
-
-* **Real-time sensor monitoring**: Temperature, Humidity, Smoke, Proximity
-* **Combined sensor chart** for all readings
-* **Alert cards** highlighting unsafe conditions
-* **Manual AI Analysis** using Google Gemini API
-* **Sample Data Mode** for testing without ESP32
-* Responsive and mobile-friendly dashboard
+This system helps detect hazardous conditions early, visualize sensor trends, and provide AI-driven safety insights.  
 
 ---
 
-## **Use Case**
+## **Use Case**  
+Mining and industrial workers face **risks like high temperature, smoke, and unsafe proximity**. The IoT Helmet Dashboard:  
 
-Mining workers face hazards like **high temperature, smoke, and unsafe proximity**. The dashboard:
-
-* Detects dangerous conditions **early**
-* Sends visual alerts via the web dashboard
-* Provides **AI insights** for risk analysis
-* Monitors **real-time trends** for safety compliance
-
----
-
-## **System Architecture**
-
-1. **ESP32 Microcontroller**:
-
-   * Sensors: DHT22, MQ-2, IR Sensor
-   * Sends data to Firebase via Wi-Fi
-2. **Firebase Realtime Database**:
-
-   * Stores sensor readings
-   * Updates the dashboard in real-time
-3. **Web Dashboard (HTML, CSS, JS)**:
-
-   * Displays sensor cards, combined chart, and AI analysis
-
-**Optional:** Wi-Fi extender for underground or remote deployment
+- Detects dangerous conditions **early**  
+- Provides **visual alerts** on a web dashboard  
+- Generates **AI insights** for risk assessment  
+- Monitors **real-time trends** for safety compliance  
 
 ---
 
-## **Hardware Requirements**
+## **System Architecture**  
 
-| Component                 | Purpose                |
-| ------------------------- | ---------------------- |
-| ESP32 Dev Board           | Microcontroller        |
-| DHT22 Sensor              | Temperature & Humidity |
-| MQ-2 Sensor               | Smoke Detection        |
-| IR Sensor                 | Proximity Detection    |
-| Jumper Wires / Breadboard | Connections            |
-| Buzzer & LED (Optional)   | Alerts                 |
+1. **ESP32 Microcontroller**: collects sensor data and sends it to Firebase  
+2. **Firebase Realtime Database**: stores sensor readings and updates dashboard in real-time  
+3. **Web Dashboard (HTML, CSS, JS)**: displays sensor **cards**, **combined charts**, and **AI analysis**  
+
+**Optional:** Wi-Fi extender for underground or remote deployment.  
 
 ---
 
-## **Firmware Setup (ESP32)**
+## **Hardware Requirements**  
 
-1. Install **Arduino IDE** & ESP32 board support
-2. Install libraries: `DHT sensor library`, `Firebase ESP32 Client`, `ArduinoJSON`
-3. Wire sensors to ESP32:
-
-| Sensor    | ESP32 Pin |
-| --------- | --------- |
-| DHT22     | D4        |
-| MQ-2      | A0        |
-| IR Sensor | D5        |
-| Buzzer    | D2        |
-| LED       | D15       |
-
-4. Upload firmware to ESP32 and configure **Wi-Fi** and **Firebase credentials**
+| Component | Purpose |
+|-----------|---------|
+| ESP32 Dev Board | Microcontroller |
+| DHT22 Sensor | Temperature & Humidity |
+| MQ-2 Sensor | Smoke Detection |
+| IR Sensor | Proximity Detection |
+| Jumper Wires / Breadboard | Connections |
+| Buzzer & LED (Optional) | Alerts |
 
 ---
 
-## **Web Dashboard Setup**
+## **Step 1: ESP32 Firmware Setup**  
+
+1. Install **Arduino IDE**  
+2. Add **ESP32 board support**:  
+   - File → Preferences → Additional Boards Manager URLs → add `https://dl.espressif.com/dl/package_esp32_index.json`  
+   - Tools → Board → Board Manager → Search ESP32 → Install  
+
+3. Install required libraries:  
+   - `DHT sensor library`  
+   - `Firebase ESP32 Client`  
+   - `ArduinoJSON`  
+
+4. Wire sensors to ESP32:  
+
+| Sensor      | ESP32 Pin |
+|------------|-----------|
+| DHT22      | D4        |
+| MQ-2       | A0        |
+| IR Sensor  | D5        |
+| Buzzer     | D2        |
+| LED        | D15       |
+
+5. Update the firmware with:  
+   - Wi-Fi credentials (`SSID` and `Password`)  
+   - Firebase Realtime Database configuration  
+
+6. Upload firmware to ESP32 using Arduino IDE  
+
+---
+
+## **Step 2: Firebase Setup**  
+
+1. Go to [Firebase Console](https://console.firebase.google.com/) and create a new project  
+2. Enable **Realtime Database** → Start in **test mode**  
+3. Add a **Web App** to get Firebase config:  
+
+```javascript
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-app.firebaseapp.com",
+  databaseURL: "https://your-project.firebaseio.com",
+  projectId: "your-project-id"
+};
+````
+
+4. Update `script.js` in the dashboard with this Firebase configuration
+5. Test ESP32 → Firebase connection by checking database values updating in real-time
+
+---
+
+## **Step 3: Web Dashboard Setup**
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/IoT-Helmet-Dashboard.git
+git clone https://github.com/Ranjithg123/IOT-Enabled-Safety-Helmet-For-Coal-Miners-.git
 ```
 
 2. Files structure:
@@ -105,55 +114,73 @@ git clone https://github.com/yourusername/IoT-Helmet-Dashboard.git
 ```
 IoT-Helmet-Dashboard/
 │
-├─ index.html
-├─ style.css
-├─ script.js
-├─ README.md
+├─ index.html         # Web dashboard
+├─ style.css          # Styling
+├─ script.js          # Firebase, charts, AI logic
+└─ README.md          # Project description
 ```
 
-3. Replace Firebase config and Gemini API key in `script.js`.
+3. Replace Firebase config and Google Gemini API key in `script.js`
+4. Serve dashboard locally:
 
-4. Run locally:
-
-* **Python**:
+* **Python 3:**
 
 ```bash
 python -m http.server 8000
 ```
 
-* **Node.js**:
+* **Node.js:**
 
 ```bash
 serve .
 ```
 
-Open browser → `http://localhost:8000`
-
-5. Test **Sample Data Mode** (built-in) if ESP32 is not connected.
+5. Open browser → `http://localhost:8000`
 
 ---
 
-## **AI Analysis**
+## **Step 4: Testing Without Hardware**
 
-* Click **Run AI Analysis** button on dashboard
-* Displays **AI-driven insights** in the panel
-* Supports **simulated response** if Gemini API key is unavailable
+* Dashboard includes **Sample Data Mode**:
 
----
-
-## **Sample Screenshots**
-
-![Dashboard Screenshot](https://via.placeholder.com/900x400?text=Dashboard+Screenshot)
-*Sample data mode running with simulated sensor readings.*
+  * Simulates sensor data every 3 seconds
+  * Updates cards and charts automatically
+  * AI Analysis button works with **simulated response**
 
 ---
 
-## **Future Enhancements**
+## **Step 5: Using AI Analysis**
 
-* Mobile app integration
-* Automated alerts via SMS/email
-* Edge AI processing on ESP32
-* Helmet buzzer/LED alert for unsafe conditions
+* Click **Run AI Analysis** button to analyze the latest sensor data
+* If no Google Gemini API key is provided, a **simulated analysis** will display
+
+---
+
+## **Step 6: Dashboard Overview**
+
+### Sensor Cards
+
+![Sensor Cards](images/sensor_cards.png)
+*Displays real-time readings with alert highlights*
+
+### Combined Chart
+
+![Combined Chart](images/combined_chart.png)
+*Shows trends for temperature, humidity, smoke, and proximity*
+
+### AI Insights Panel
+
+![AI Insights](images/ai_insights.png)
+*Displays Google Gemini API or simulated AI analysis*
+
+---
+
+## **Step 7: Optional Enhancements**
+
+* Mobile-friendly app for remote monitoring
+* SMS/Email notifications when thresholds exceeded
+* Edge AI processing on ESP32 for real-time alerts
+* Helmet buzzer/LED triggers for unsafe conditions
 
 ---
 
@@ -168,6 +195,6 @@ Open browser → `http://localhost:8000`
 
 ## **License**
 
-This project is licensed under the **MIT License**.
+This project is licensed under the **MIT License**
 
----
+
