@@ -165,12 +165,12 @@ serve .
 
 ### Combined Chart
 
-![Combined Chart](images/combined_chart.png)
+![Combined Chart](images/combined_chart.png.jpg)
 *Shows trends for temperature, humidity, smoke, and proximity*
 
 ### AI Insights Panel
 
-![AI Insights](images/ai_insights.png)
+![AI Insights](images/ai_insights.png.jpg)
 *Displays Google Gemini API or simulated AI analysis*
 
 ---
