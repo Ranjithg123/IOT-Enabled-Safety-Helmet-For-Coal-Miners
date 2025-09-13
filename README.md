@@ -132,6 +132,7 @@ python -m http.server 8000
 * **Node.js:**
 
 ```bash
+npm install -g serve
 serve .
 ```
 
