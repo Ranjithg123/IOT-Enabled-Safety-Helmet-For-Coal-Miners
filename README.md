@@ -106,7 +106,7 @@ const firebaseConfig = {
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Ranjithg123/IOT-Enabled-Safety-Helmet-For-Coal-Miners-.git
+git clone https://github.com/Ranjithg123/IOT-Enabled-Safety-Helmet-For-Coal-Miners.git
 ```
 
 2. Files structure:
