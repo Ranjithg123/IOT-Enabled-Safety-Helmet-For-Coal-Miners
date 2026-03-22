@@ -12,8 +12,8 @@
 ## 🌐 Live Web Dashboard Demo
 
 <p align="center">
-  <a href="https://iot.rockcos.com" target="_blank">
-    <img src="https://img.shields.io/badge/🚀%20Launch%20Live%20Dashboard-iot.rockcos.com-0077FF?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Live Dashboard" />
+  <a href="https://ranjithg123.github.io/IOT-Enabled-Safety-Helmet-For-Coal-Miners/" target="_blank">
+    <img src="https://img.shields.io/badge/🚀%20Launch%20Live%20Dashboard-Click%20Here-0077FF?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Live Dashboard" />
   </a>
   <br/>
   <strong>👆 Click above to open the live interactive dashboard</strong>
