@@ -1,31 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IoT Helmet Dashboard</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IoT Helmet Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<h1>IoT Helmet Dashboard</h1>
+  <h1>IoT Helmet Dashboard</h1>
 
-<div class="cards">
-  <div class="card" id="tempCard">Temperature: -- °C</div>
-  <div class="card" id="humCard">Humidity: -- %</div>
-  <div class="card" id="smokeCard">Smoke: --</div>
-  <div class="card" id="proxCard">Proximity: --</div>
-</div>
+  <div class="cards">
+    <div class="card" id="tempCard">Temperature: -- °C</div>
+    <div class="card" id="humCard">Humidity: -- %</div>
+    <div class="card" id="smokeCard">Smoke: --</div>
+    <div class="card" id="proxCard">Proximity: --</div>
+  </div>
 
-<canvas id="combinedChart"></canvas>
+  <div class="charts-container">
+    <div class="chart-wrapper">
+      <h3>Temperature (°C)</h3>
+      <canvas id="tempChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h3>Humidity (%)</h3>
+      <canvas id="humChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h3>Smoke Level</h3>
+      <canvas id="smokeChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h3>Proximity Status</h3>
+      <canvas id="proxChart"></canvas>
+    </div>
+  </div>
 
-<div id="gemini-insights">Google Gemini AI Insights: Waiting for analysis...</div>
+  <div id="gemini-insights">Google Gemini AI Insights: Waiting for analysis...</div>
 
-<button id="aiBtn">Run AI Analysis</button>
+  <button id="aiBtn">Run AI Analysis</button>
 
-<script src="script.js"></script>
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <script src="daim-data.js"></script>
 </body>
+
 </html>

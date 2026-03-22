@@ -6,15 +6,15 @@
 #include <WiFiClientSecure.h>
 
 // Wi-Fi Credentials
-#define WIFI_SSID "Ranjith"
-#define WIFI_PASSWORD "12345678"
+#define WIFI_SSID "YOUR_WIFI_SSID"
+#define WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
 
 // Firebase Project Credentials
-#define FIREBASE_HOST "https://helmet-108d0-default-rtdb.asia-southeast1.firebasedatabase.app/"
-#define FIREBASE_AUTH "BqTsG4ewpexsWBXCxnf1ANege6JLTPB9FJGe6tc0"
+#define FIREBASE_HOST "YOUR_FIREBASE_PROJECT.firebaseio.com"
+#define FIREBASE_AUTH "YOUR_FIREBASE_DATABASE_SECRET"
 
 // Google Sheets Web App URL
-const char* googleScriptUrl = "https://script.google.com/macros/s/AKfycbyurwkZVB7oTM9v32MJffVcAmwVulsWk0kkZ5y-EsR1aanbxQmZN8T4ZRejTGMJiBCqHw/exec";
+const char* googleScriptUrl = "YOUR_GOOGLE_APPS_SCRIPT_URL";
 
 // Initialize Firebase and JSON objects
 FirebaseData firebaseData;

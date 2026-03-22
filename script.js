@@ -13,25 +13,58 @@ const db = firebase.database();
 const labels = [];
 const tempData = [], humData = [], smokeData = [], proxData = [];
 
-const combinedChart = new Chart(document.getElementById('combinedChart'), {
-  type: 'line',
-  data: {
-    labels: labels,
-    datasets: [
-      { label: 'Temperature (°C)', data: tempData, borderColor: 'red', fill: false, tension: 0.3 },
-      { label: 'Humidity (%)', data: humData, borderColor: 'blue', fill: false, tension: 0.3 },
-      { label: 'Smoke', data: smokeData, borderColor: 'gray', fill: false, tension: 0.3 },
-      { label: 'Proximity', data: proxData, borderColor: 'green', fill: false, tension: 0.3 }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { position: 'top' } },
-    scales: { y: { beginAtZero: true } }
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#64748b' } },
+    y: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#64748b' }, beginAtZero: true }
   }
+};
+
+const tempChart = new Chart(document.getElementById('tempChart'), {
+  type: 'line',
+  data: { labels: labels, datasets: [{ data: tempData, borderColor: '#f43f5e', backgroundColor: 'rgba(244, 63, 94, 0.1)', fill: true, tension: 0.4, borderWidth: 2 }] },
+  options: chartOptions
+});
+
+const humChart = new Chart(document.getElementById('humChart'), {
+  type: 'line',
+  data: { labels: labels, datasets: [{ data: humData, borderColor: '#0ea5e9', backgroundColor: 'rgba(14, 165, 233, 0.1)', fill: true, tension: 0.4, borderWidth: 2 }] },
+  options: chartOptions
+});
+
+const smokeChart = new Chart(document.getElementById('smokeChart'), {
+  type: 'line',
+  data: { labels: labels, datasets: [{ data: smokeData, borderColor: '#f59e0b', backgroundColor: 'rgba(245, 158, 11, 0.1)', fill: true, tension: 0.4, borderWidth: 2 }] },
+  options: chartOptions
+});
+
+const proxChart = new Chart(document.getElementById('proxChart'), {
+  type: 'line',
+  data: { labels: labels, datasets: [{ data: proxData, borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.4, borderWidth: 2 }] },
+  options: chartOptions
 });
 
 let latestData = {};
+
+let lastAlertTimes = { temp: 0, smoke: 0, prox: 0 };
+function showToast(message) {
+  const container = document.getElementById('toast-container');
+  if (!container) return; // Safety check
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `<span class="icon">⚠️</span><span>${message}</span>`;
+  container.appendChild(toast);
+
+  setTimeout(() => toast.classList.add('show'), 10);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400);
+  }, 4000);
+}
 
 // ===== Update Cards =====
 function updateCards(data) {
@@ -45,9 +78,27 @@ function updateCards(data) {
   smokeCard.textContent = `Smoke: ${data.smoke}`;
   proxCard.textContent = `Proximity: ${data.proximity}`;
 
-  tempCard.classList.toggle('alert', data.temperature > 50);
-  smokeCard.classList.toggle('alert', data.smoke > 300);
-  proxCard.classList.toggle('alert', data.proximity === 1);
+  const isTempHigh = data.temperature > 50;
+  const isSmokeHigh = data.smoke > 300;
+  const isProxHigh = data.proximity === 1;
+
+  tempCard.classList.toggle('alert', isTempHigh);
+  smokeCard.classList.toggle('alert', isSmokeHigh);
+  proxCard.classList.toggle('alert', isProxHigh);
+
+  const now = Date.now();
+  if (isTempHigh && now - lastAlertTimes.temp >= 5000) {
+    showToast(`DANGER: High Temperature (${data.temperature}°C)`);
+    lastAlertTimes.temp = now;
+  }
+  if (isSmokeHigh && now - lastAlertTimes.smoke >= 5000) {
+    showToast(`DANGER: High Smoke (${data.smoke})`);
+    lastAlertTimes.smoke = now;
+  }
+  if (isProxHigh && now - lastAlertTimes.prox >= 5000) {
+    showToast(`DANGER: Proximity Alert!`);
+    lastAlertTimes.prox = now;
+  }
 }
 
 // ===== Gemini AI Analysis =====
@@ -96,7 +147,10 @@ db.ref('helmet').on('value', snapshot => {
     proxData.shift();
   }
 
-  combinedChart.update();
+  tempChart.update();
+  humChart.update();
+  smokeChart.update();
+  proxChart.update();
   updateCards(data);
 });
 
